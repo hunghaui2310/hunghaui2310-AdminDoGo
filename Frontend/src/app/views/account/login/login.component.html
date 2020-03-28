@@ -1,0 +1,74 @@
+
+<div>
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">CHÀO MỪNG ĐẾN VỚI TRANG QUẢN LÝ</h1>
+                  </div>
+                  <form class="user" [formGroup]="loginForm">
+                    <div class="form-group">
+                      <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                             aria-describedby="emailHelp" placeholder="Tên đăng nhập..." (focus)="userActive()" (focusout)="userBlur()" formControlName="username">
+                      <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)"
+                           class="log-error-container">
+                        <div class="small-text" *ngIf="f.username.errors.required">
+                          Tên đăng nhập không được để trống
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                             placeholder="Mật khẩu..." (focus)="passActive()" (focusout)="passBlur()" formControlName="password">
+                      <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)"
+                           class="log-error-container">
+                        <div class="small-text" *ngIf="f.password.errors.required">
+                          Mật khẩu không được để trống
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Lưu mật khẩu</label>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary btn-user btn-block" (click)="onSubmit()">
+                      Đăng nhập
+                    </button>
+                    <p *ngIf="isLoginFail" class="login-failed">Sai tên đăng nhập hoặc mật khẩu</p>
+                    <hr>
+                    <a href="index.html" class="btn btn-google btn-user btn-block">
+                      <i class="fab fa-google fa-fw"></i> Đăng nhập bằng Google
+                    </a>
+                    <a (click)="loginFacebook()" class="btn btn-facebook btn-user btn-block unauthenticated">
+                      <i class="fab fa-facebook-f fa-fw"></i> Đăng nhập bằng Facebook
+                    </a>
+                  </form>
+                  <hr>
+                  <div class="text-center">
+                    <a routerLink="/forgot-password">Quên mật khẩu?</a>
+                  </div>
+                  <div class="text-center">
+                    <a routerLink="/register">Tạo tài khoản</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

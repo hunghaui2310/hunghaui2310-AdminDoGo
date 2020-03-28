@@ -1,0 +1,149 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card mt-2 pd-r">
+      <div class="card-body mt-3">
+        <form [formGroup]="formProduct">
+          <div class="form-group row align-items-center">
+            <div class="col-xl-1 col-md-2 label-name">Tên sản phẩm</div>
+            <div class="col-xl-3 col-md-4 col-sm-12 ml-4">
+              <input type="text" formControlName="productName" class="cvNumber" maxlength="255">
+              <span class="separator"></span>
+            </div>
+            <div class="col-xl-1 col-md-1 col-sm-12 label-name">Giá(triệu)</div>
+            <div class="col-xl-2 col-md-4 col-sm-12 row">
+              <input type="text" formControlName="fromPrice" class="cvNumber col-5 pl-0" maxlength="100" placeholder="Từ">
+              <input type="text" formControlName="toPrice" class="cvNumber col-5 ml-3 pl-0" maxlength="100" placeholder="Đến">
+            </div>
+            <div class="col-xl-1 col-md-2 col-sm-12 ml-5">Thể loại</div>
+            <div class="col-xl-3 col-md-4 col-sm-12">
+              <select formControlName="category" class="select-option">
+                <option [value]='null'>Chọn</option>
+                <option *ngFor="let eachCate of listCate" value="{{eachCate.id}}">{{eachCate.categoryName}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="w-100 d-flex justify-content-center btn-update-config">
+        <button class="btn m-2 btn-primary" (click)="search()"><i class="fa fa-search"></i>Tìm kiếm
+        </button>
+        <button class="btn m-2 btn-primary" type="button" (click)="showModalAdd()"><i class="fa fa-plus"></i>
+          Thêm mới
+        </button>
+        <button class="btn m-2 btn-primary" type="button" (click)="download(listCate)"><i class="fa fa-download"></i>Tải xuống</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead class="header-table">
+        <tr style="background-color: aliceblue">
+          <th> STT</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Lượt thích</th>
+          <th>Lượt mua</th>
+          <th>Mô tả</th>
+          <th>Giảm giá</th>
+          <th>Ngày tạo</th>
+          <th>Mã KM</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngIf="listProduct.length === 0">
+        <tr>
+          <td colspan="9" align="center" style="background: white">
+            Không có dữ liệu
+          </td>
+        </tr>
+        </tbody>
+
+        <tbody *ngIf="listProduct && listProduct.length > 0">
+        <tr
+          *ngFor="let eachPro of listProduct | paginate: {id:'productPagination', itemsPerPage: pageSize, currentPage: currentP, totalItems: listProduct.length}, index as i">
+          <td class="text-center">{{currentP * pageSize - (pageSize - 1) + i}}</td>
+          <td>
+            <div data-toggle="tooltip" title="{{eachPro.productName}}">{{eachPro.productName}}</div>
+          </td>
+          <td>
+            <div data-toggle="tooltip" title="{{eachPro.price * 1000000 | number}}">{{eachPro.price * 1000000 | number}}</div>
+          </td>
+          <td>
+            <div data-toggle="tooltip" title="{{eachPro.numLike}}">{{eachPro.numLike}}</div>
+          </td>
+          <td>
+            <div data-toggle="tooltip" title="{{eachPro.numBuy}}">{{eachPro.numBuy}}</div>
+          </td>
+          <td>
+            <div data-toggle="tooltip" title="{{eachPro.description}}"> {{eachPro.description}}</div>
+          </td>
+          <td>
+            <div data-toggle="tooltip" title="{{eachPro.discount}}" *ngIf="eachPro.discount"> {{eachPro.discount}}%</div>
+            <div *ngIf="!eachPro.discount" style="color: darkgray">(Trống)</div>
+          </td>
+          <td>
+            <div data-toggle="tooltip" title="{{eachPro.createDate}}"> {{eachPro.createDate}}</div>
+          </td>
+          <td>
+            <div data-toggle="tooltip" title="{{eachPro.codeDiscount}}" *ngIf="eachPro.codeDiscount"> {{eachPro.codeDiscount}}</div>
+            <div *ngIf="!eachPro.codeDiscount" style="color: darkgray">(Trống)</div>
+          </td>
+          <td align="center">
+            <span data-toggle="tooltip" data-toggle="tooltip" style="cursor: pointer; padding-right: 0.4rem"
+                  title="Sửa"><i
+              class="fa fa-edit "></i></span>
+            <span data-toggle="tooltip" data-toggle="tooltip" style="cursor: pointer" (click)="openConfirm(deleteProduct, eachPro.id)"
+                  title="Xóa"><i
+              class="fa fa-trash-alt"></i></span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="w-100 d-flex justify-content-between" *ngIf="listProduct && listProduct.length > 0">
+      <p style="margin-left: 5px;">Từ {{currentP * pageSize - (pageSize - 1)}}
+        đến
+        <span *ngIf="currentP*pageSize <  listProduct.length">{{currentP * pageSize}}</span>
+        <span *ngIf="currentP*pageSize >= listProduct.length">{{listProduct.length}}</span>
+        trên tổng số {{listProduct.length}}
+        sản phẩm</p>
+      <ul style="float:right;" class="pagination">
+        <pagination-controls id='productPagination' (pageChange)="pageChange($event)"
+                             previousLabel="Trước"
+                             nextLabel="Tiếp">
+        </pagination-controls>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #deleteProduct>
+  <div class="row" style="margin-right: 0 !important; margin-left: 0 !important;">
+    <div class="col-md-10 modal-body">
+      <span> <img style="margin: 0 3px 3px 0;" src="assets/icons8-question-mark-16.png"
+                  alt="">Bạn có chắc chắn muốn xóa</span>
+    </div>
+
+    <div class="col-md-2 modal-body">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="onBack()" size="6MB">
+        <span aria-hidden="true" style="border: none">&times;</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary click-btn-upload" (click)=onBack() style="width: 88.64px;"><i
+      class="fa fa-times"></i>
+      Không
+    </button>
+    <button class="btn btn-primary click-btn-upload" type="button" (click)=removeProduct() style="width: 88.64px;"><i
+      class="fa fa-check"></i>
+      Có
+    </button>
+  </div>
+</ng-template>
+

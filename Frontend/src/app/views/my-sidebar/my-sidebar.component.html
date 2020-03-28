@@ -1,0 +1,42 @@
+<mat-nav-list>
+  <div class="profile-card">
+    <div class="header">
+      <h2>HungNN</h2>
+    </div>
+    <img src="https://znews-photo.zadn.vn/w660/Uploaded/mdf_drkydd/2019_08_10/0.jpg" alt="">
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <h2 matSubheader>Pages</h2>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/">
+    <mat-icon>dashboard</mat-icon>
+    Dashboard
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/posts">
+    <mat-icon>show_chart</mat-icon>
+    Charts
+  </a>
+  <div class="management">
+    <h2 matSubheader>Quản lý</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/product">
+      Quản lý sản phẩm
+    </a>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/category">
+      Quản lý thể loại
+    </a>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/blog">
+      Quản lý bài viết
+    </a>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/employee">
+      Quản lý nhân viên
+    </a>
+  </div>
+
+</mat-nav-list>
+

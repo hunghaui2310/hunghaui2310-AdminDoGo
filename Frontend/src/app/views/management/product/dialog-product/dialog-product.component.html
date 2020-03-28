@@ -1,0 +1,134 @@
+<div class="w-100">
+  <div class="product-admin">
+    <h4>
+      Thêm mới/ sửa sản phẩm
+    </h4>
+    <span (click)="close()" style="cursor: pointer"><i class="fa fa-times"></i></span>
+  </div>
+  <div class="mt-3">
+    <form [formGroup]="productForm">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Tên sản phẩm</label>
+          <input type="text" class="form-control" id="inputEmail4" placeholder="Nhập tên sản phẩm..." (input)="checkSpace($event)"
+                 formControlName="productName">
+          <mat-error class="error-message" *ngFor="let validation of validation_messages.productName">
+            <mat-error
+              *ngIf="productForm.get('productName').hasError(validation.type) && (productForm.get('productName').dirty || productForm.get('productName').touched)">
+              {{validation.message}}
+            </mat-error>
+            <mat-error
+              *ngIf="isPreSpace && !productForm.get('productName').hasError(validation.type) && (productForm.get('productName').dirty || productForm.get('productName').touched)">
+              Tên sản phẩm không được để trống</mat-error>
+          </mat-error>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputZip">Thể loại</label>
+          <select id="inputState" class="form-control" formControlName="category">
+            <option [value]="null" disabled>Chọn</option>
+            <option *ngFor="let eachCate of listCategory" value="{{eachCate.id}}">{{eachCate.categoryName}}</option>
+          </select>
+          <mat-error class="error-message" *ngFor="let validation of validation_messages.category">
+            <mat-error
+              *ngIf="productForm.get('category').hasError(validation.type) && (productForm.get('category').dirty || productForm.get('category').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">Giá</label>
+          <input type="number" class="form-control" id="inputCity" formControlName="price" (input)="checkSpace($event)">
+          <mat-error class="error-message" *ngFor="let validation of validation_messages.price">
+            <mat-error
+              *ngIf="productForm.get('price').hasError(validation.type) && (productForm.get('price').dirty || productForm.get('price').touched)">
+              {{validation.message}}
+            </mat-error>
+            <mat-error
+              *ngIf="isPreSpace && !productForm.get('price').hasError(validation.type) && (productForm.get('price').dirty || productForm.get('price').touched)">
+              Giá sản phẩm không được để trống</mat-error>
+          </mat-error>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">Mã khuyến mại</label>
+          <input type="text" class="form-control" id="inputPassword4" formControlName="codeDiscount">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Khuyến mại(%)</label>
+          <input type="number" class="form-control" id="inputZip" formControlName="discount">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAddress">Mô tả</label>
+        <textarea type="text" class="form-control" id="inputAddress" placeholder="Thêm mô tả..."
+                  formControlName="description" rows="3"></textarea>
+        <mat-error class="error-message" *ngFor="let validation of validation_messages.description">
+          <mat-error
+            *ngIf="productForm.get('description').hasError(validation.type) && (productForm.get('description').dirty || productForm.get('description').touched)">
+            {{validation.message}}
+          </mat-error>
+          <mat-error
+            *ngIf="isPreSpace && !productForm.get('description').hasError(validation.type) && (productForm.get('description').dirty || productForm.get('description').touched)">
+            Mô tả không được để trống</mat-error>
+        </mat-error>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Tải ảnh lên(500*500)</label>
+          <div>
+            <input type="file" class="form-control" formControlName="bigFile" (change)="bigFileToBase64($event)">
+            <mat-error class="error-message" *ngFor="let validation of validation_messages.bigFile">
+              <mat-error
+                *ngIf="productForm.get('bigFile').hasError(validation.type) && (productForm.get('bigFile').dirty || productForm.get('bigFile').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label>Tải ảnh lên(300*300)</label>
+          <input type="file" class="form-control" formControlName="smallFile" (change)="smallFileToBase64($event)">
+          <mat-error class="error-message" *ngFor="let validation of validation_messages.bigFile">
+            <mat-error
+              *ngIf="productForm.get('bigFile').hasError(validation.type) && (productForm.get('bigFile').dirty || productForm.get('bigFile').touched)">
+              {{validation.message}}
+            </mat-error>
+          </mat-error>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary" (click)="openConfirm(insertProduct)"
+                [disabled]="productForm.invalid || isPreSpace"><i class="fa fa-save"></i> Lưu</button>
+        <button type="submit" class="btn btn-primary ml-3" (click)="close()"><i class="fa fa-times"></i> Hủy</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #insertProduct>
+  <div class="row" style="margin-right: 0 !important; margin-left: 0 !important;">
+    <div class="col-md-10 modal-body">
+      <span> <img style="margin: 0 3px 3px 0;" src="assets/icons8-question-mark-16.png"
+                  alt="">Bạn có chắc chắn muốn lưu không?</span>
+    </div>
+
+    <div class="col-md-2 modal-body">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="onBack()" size="6MB">
+        <span aria-hidden="true" style="border: none">&times;</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary click-btn-upload" (click)=onBack() style="width: 88.64px;"><i
+      class="fa fa-times"></i>
+      Không
+    </button>
+    <button class="btn btn-primary click-btn-upload" type="button" (click)=saveProduct() style="width: 88.64px;"><i
+      class="fa fa-check"></i>
+      Có
+    </button>
+  </div>
+</ng-template>
+

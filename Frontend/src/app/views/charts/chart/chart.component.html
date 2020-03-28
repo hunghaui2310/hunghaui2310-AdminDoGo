@@ -1,0 +1,118 @@
+<!-- Content Wrapper -->
+
+<!-- Topbar -->
+<!-- End of Topbar -->
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="menu-option">
+    <div>
+      <h1 class="h3 mb-2 text-gray-800">Thống kê doanh thu</h1>
+    </div>
+    <div class="date-picker-custom">
+      <!--      <mat-form-field>-->
+      <!--        <input matInput [matDatepicker]="picker" placeholder="Chọn chu kỳ"-->
+      <!--               (dateChange)="addEvent($event)">-->
+      <!--        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+      <!--        <mat-datepicker #picker></mat-datepicker>-->
+      <!--      </mat-form-field>-->
+      <form>
+        <app-date-picker placeholder="Chọn ngày" [control]="testForm.get('testDate')"
+                         required="true" errorMessage="Chưa chọn ngày"></app-date-picker>
+      </form>
+      <!--      <div class="example-events">-->
+      <!--        <div *ngFor="let e of events">{{e}}</div>-->
+      <!--      </div>-->
+    </div>
+  </div>
+  <!--  <mat-form-field>-->
+  <!--    <mat-label>Choose a date</mat-label>-->
+  <!--    <input matInput [matDatepicker]="picker">-->
+  <!--    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+  <!--    <mat-datepicker #picker></mat-datepicker>-->
+  <!--  </mat-form-field>-->
+  <p>Thống kê doanh thu theo ngày {{testForm.get('testDate').value | date: 'dd/MM/yyyy' }}</p>
+
+  <!-- Content Row -->
+  <div class="row">
+
+    <div class="col-xl-8 col-lg-7">
+
+      <!-- Area Chart -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <!--                  <canvas id="myAreaChart"></canvas>-->
+            <app-line-chart></app-line-chart>
+          </div>
+          <hr>
+        </div>
+      </div>
+
+      <!-- Bar Chart -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-bar">
+            <!--                  <canvas id="myBarChart"></canvas>-->
+            <app-bar-chart></app-bar-chart>
+          </div>
+          <hr>
+          <!--                Styling for the bar chart can be found in the <code>/js/demo/chart-bar-demo.js</code> file.-->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Donut Chart -->
+    <div class="col-xl-4 col-lg-5">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-pie pt-4">
+            <!--                  <canvas id="myPieChart"></canvas>-->
+            <app-donut-chart class="mt-10"></app-donut-chart>
+          </div>
+          <hr>
+          <!--                Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.-->
+        </div>
+      </div>
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-pie pt-4">
+            <!--                  <canvas id="myPieChart"></canvas>-->
+            <app-pie-chart class="mt-10"></app-pie-chart>
+          </div>
+          <hr>
+          <!--                Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of Main Content -->
+
+
+</div>
+<!-- End of Content Wrapper -->
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
