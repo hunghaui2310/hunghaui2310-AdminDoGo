@@ -30,5 +30,7 @@ export const appConfig = {
   insert_employee_API: URL_BASE + '/employee/newEmployee',
   get_all_employee_API: URL_BASE + '/employee/getEmployee',
   get_manage_API: URL_BASE + '/employee/getManage',
-  reset_password_API: URL_BASE + '/employee/reset-pass'
-}
+  reset_password_API: URL_BASE + '/employee/reset-pass',
+  delete_employee_API: URL_BASE + '/employee/delete',
+  search_employee_API: URL_BASE + '/employee/search'
+};

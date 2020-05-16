@@ -6,7 +6,7 @@ import {appConfig} from '../config/app.config';
 
 
 @Injectable()
-export class AuthGuard implements CanActivate{
+export class AuthGuard implements CanActivate {
 
   constructor(private router: Router,
               private oauthService: OauthService) {

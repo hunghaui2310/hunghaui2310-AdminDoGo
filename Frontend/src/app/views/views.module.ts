@@ -4,11 +4,11 @@ import {MyHeaderComponent} from './my-header/my-header.component';
 import {MyFooterComponent} from './my-footer/my-footer.component';
 import {MySidebarComponent} from './my-sidebar/my-sidebar.component';
 import {
-  MatButtonModule, MatDialogModule,
+  MatButtonModule, MatDatepickerModule, MatDialogModule,
   MatDividerModule, MatFormFieldModule,
-  MatIconModule,
+  MatIconModule, MatInputModule,
   MatListModule,
-  MatMenuModule,
+  MatMenuModule, MatNativeDateModule,
   MatPaginatorModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
@@ -35,6 +35,8 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { DatePickerComponent } from './charts/date-picker/date-picker.component';
 import { ChartComponent } from './charts/chart/chart.component';
 import { DountChartComponent } from './charts/dount-chart/dount-chart.component';
+import {ChartsModule} from 'ng2-charts';
+import { DialogEmployeeComponent } from './management/employee/dialog-employee/dialog-employee.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import { DountChartComponent } from './charts/dount-chart/dount-chart.component'
     LineChartComponent,
     DatePickerComponent,
     ChartComponent,
-    DountChartComponent
+    DountChartComponent,
+    DialogEmployeeComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +80,11 @@ import { DountChartComponent } from './charts/dount-chart/dount-chart.component'
     NgxPaginationModule,
     MatFormFieldModule,
     MatDialogModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ChartsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   exports: [
     MyHeaderComponent,
@@ -99,6 +106,6 @@ import { DountChartComponent } from './charts/dount-chart/dount-chart.component'
     LineChartComponent,
     DatePickerComponent
   ],
-  entryComponents: [DialogProductComponent]
+  entryComponents: [DialogProductComponent, DialogEmployeeComponent]
 })
 export class ViewsModule { }

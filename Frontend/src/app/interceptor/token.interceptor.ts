@@ -12,7 +12,7 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let requestOption:any = {};
+    let requestOption: any = {};
     let access_token = this.auth.getToken();
     // if(this.auth.tokenExpired())
     // {

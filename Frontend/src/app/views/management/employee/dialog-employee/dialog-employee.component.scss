@@ -1,0 +1,26 @@
+.product-admin{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.42);
+}
+.cvNumber {
+  background: none;
+  outline: none;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid;
+
+  &:focus + .separator {
+    transform: scaleX(1) translateY(-2px);
+    opacity: 1;
+  }
+}
+
+.cvNumber {
+  &:read-only {
+    pointer-events: none;
+  }
+
+}

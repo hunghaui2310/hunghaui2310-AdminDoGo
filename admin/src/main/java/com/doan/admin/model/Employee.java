@@ -15,6 +15,8 @@ public class Employee {
     private String lastName;
     private String phoneNumber;
     private String address;
+    private Date birthday;
+    private String gender;
     private String manageCode;
     private Integer salary;
     private Date createDate;
@@ -92,6 +94,24 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Column(name = "birthday")
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    @Column(name = "gender")
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     @Column(name = "manage_code")

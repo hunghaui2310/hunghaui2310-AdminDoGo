@@ -9,7 +9,7 @@ public interface EmployeeService {
 
     String insertEmployee(Employee employee) throws Exception;
 
-    List<Employee> getAllEmployee() throws Exception;
+    List<EmployeeDTO> getAllEmployee() throws Exception;
 
     List<Employee> getManage() throws Exception;
 
@@ -18,4 +18,8 @@ public interface EmployeeService {
     String resetPass(Employee employee) throws Exception;
 
     String editEmployee(Employee employee) throws Exception;
+
+    String deleteEmployee(Long id) throws Exception;
+
+    List<EmployeeDTO> searchEmployee(EmployeeDTO employeeDTO) throws Exception;
 }

@@ -1618,12 +1618,6 @@ pre code {
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .form-control {
-    transition: none
-  }
-}
-
 .form-control::-ms-expand {
   background-color: transparent;
   border: 0
@@ -2688,11 +2682,11 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
   transition: height .15s ease
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .collapsing {
-    transition: none
-  }
-}
+//@media (prefers-reduced-motion: reduce) {
+//  .collapsing {
+//    transition: none
+//  }
+//}
 
 .dropdown, .dropleft, .dropright, .dropup {
   position: relative
@@ -4415,11 +4409,11 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .badge {
-    transition: none
-  }
-}
+//@media (prefers-reduced-motion: reduce) {
+//  .badge {
+//    transition: none
+//  }
+//}
 
 a.badge:focus, a.badge:hover {
   text-decoration: none

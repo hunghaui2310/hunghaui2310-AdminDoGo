@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../model/user';
 import {appConfig} from '../config/app.config';
+import {EmployeeModel} from '../model/employee.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,19 @@ export class EmployeeService {
     return this.http.post(appConfig.insert_employee_API, employee);
   }
 
+  addEmployeeAPI(employee: EmployeeModel) {
+    return this.http.post(appConfig.insert_employee_API, employee);
+  }
+
   resetPasswordAPI(employee: User) {
     return this.http.post(appConfig.reset_password_API, employee);
+  }
+
+  deleteEmployeeAPI(employee: EmployeeModel) {
+    return this.http.post(appConfig.delete_employee_API, employee);
+  }
+
+  searchEmployeeAPI(employee: EmployeeModel) {
+    return this.http.post(appConfig.search_employee_API, employee);
   }
 }

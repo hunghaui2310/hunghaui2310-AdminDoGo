@@ -11,7 +11,7 @@ export class User {
   createDate?: string;
   address?: string;
   token: string;
-  role : string;
+  role: string;
   lastLogin: string;
   manageName: string;
 

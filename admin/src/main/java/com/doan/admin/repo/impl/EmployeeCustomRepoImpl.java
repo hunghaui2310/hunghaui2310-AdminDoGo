@@ -1,5 +1,7 @@
 package com.doan.admin.repo.impl;
 
+import com.doan.admin.dto.EmployeeDTO;
+import com.doan.admin.helper.DataUtil;
 import com.doan.admin.model.Employee;
 import com.doan.admin.repo.EmployeeCustomRepo;
 
@@ -9,6 +11,8 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /*
  *   author: HungNN
@@ -66,5 +70,68 @@ public class EmployeeCustomRepoImpl implements EmployeeCustomRepo {
         query.setParameter("email", text);
         query.setParameter("phoneNumber", text);
         return (Employee) query.getSingleResult();
+    }
+
+    @Override
+    public List<Object[]> searchEmployee(EmployeeDTO employeeDTO) throws Exception {
+        StringBuilder sqlBuilder = new StringBuilder();
+        HashMap hashMap = new HashMap();
+        sqlBuilder.append("select * from employee");
+        sqlBuilder.append(appendEmployeeSearch(employeeDTO,hashMap));
+        Query query = entityManager.createNativeQuery(sqlBuilder.toString());
+        hashMap.forEach((k, v) -> {
+            query.setParameter(k.toString(), v);
+        });
+        return query.getResultList();
+    }
+
+    public StringBuilder appendEmployeeSearch(EmployeeDTO employeeDTO, HashMap hashMap) {
+        StringBuilder sql = new StringBuilder();
+        sql.append(" where 1 = 1");
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getCode())) {
+            sql.append(" and code like :code");
+            hashMap.put("code", "%" + employeeDTO.getCode() + "%");
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getEmail())) {
+            sql.append(" and email = :email");
+            hashMap.put("email", employeeDTO.getEmail());
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getFirstName())) {
+            sql.append(" and first_name like :firstName");
+            hashMap.put("firstName", "%" + employeeDTO.getFirstName() + "%");
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getLastName())) {
+            sql.append(" and last_name like :lastName");
+            hashMap.put("lastName", "%" + employeeDTO.getLastName() + "%");
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getPhoneNumber())) {
+            sql.append(" and phone_number = :phoneNumber");
+            hashMap.put("phoneNumber", employeeDTO.getPhoneNumber());
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getAddress())) {
+            sql.append(" and address like :address");
+            hashMap.put("address", "%" + employeeDTO.getAddress() + "%");
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getBirthday())) {
+            sql.append(" and birthday = :birthDay");
+            hashMap.put("birthDay", employeeDTO.getBirthday());
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getGender())) {
+            sql.append(" and gender = :gender");
+            hashMap.put("gender", employeeDTO.getGender());
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getManageCode())) {
+            sql.append(" and manage_code = :manageCode");
+            hashMap.put("manageCode", employeeDTO.getManageCode());
+        }
+        if (!DataUtil.isNullOrZero(employeeDTO.getSalary())) {
+            sql.append(" and salary = :salary");
+            hashMap.put("salary", employeeDTO.getSalary());
+        }
+        if (!DataUtil.isNullOrEmpty(employeeDTO.getCreateDate())) {
+            sql.append(" and create_date like :createDate");
+            hashMap.put("createDate", "%" + employeeDTO.getCreateDate() + "%");
+        }
+        return sql;
     }
 }

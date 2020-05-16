@@ -4,3 +4,13 @@ ul li {
 ul {
   margin-top: 15px;
 }
+
+.notification {
+  line-height: 20px;
+  min-width: 18px;
+  background-color: red;
+  border-radius: 50%;
+  max-height: 22px;
+  right: 0;
+  align-items: center;
+}

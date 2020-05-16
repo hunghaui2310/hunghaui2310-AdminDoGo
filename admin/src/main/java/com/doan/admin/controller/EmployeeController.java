@@ -1,5 +1,6 @@
 package com.doan.admin.controller;
 
+import com.doan.admin.dto.EmployeeDTO;
 import com.doan.admin.helper.ApiResponse;
 import com.doan.admin.model.Employee;
 import com.doan.admin.service.EmployeeService;
@@ -34,7 +35,7 @@ public class EmployeeController {
     @GetMapping("/getEmployee")
     public ApiResponse getAllEmployee() {
         try {
-            List<Employee> list = employeeService.getAllEmployee();
+            List<EmployeeDTO> list = employeeService.getAllEmployee();
             return ApiResponse.build(HttpServletResponse.SC_OK, true, "", list);
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,6 +70,28 @@ public class EmployeeController {
         try {
             String message = employeeService.resetPass(employee);
             return ApiResponse.build(HttpServletResponse.SC_OK, true, "", message);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiResponse.build(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, false, e.getMessage(), null);
+        }
+    }
+
+    @PostMapping("/delete")
+    public ApiResponse deleteEmployee(@RequestBody EmployeeDTO employee) {
+        try {
+            String message = employeeService.deleteEmployee(employee.getId());
+            return ApiResponse.build(HttpServletResponse.SC_OK, true, "", message);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiResponse.build(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, false, e.getMessage(), null);
+        }
+    }
+
+    @PostMapping("/search")
+    public ApiResponse searchEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        try {
+            List<EmployeeDTO> list = employeeService.searchEmployee(employeeDTO);
+            return ApiResponse.build(HttpServletResponse.SC_OK, true, "", list);
         } catch (Exception e) {
             e.printStackTrace();
             return ApiResponse.build(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, false, e.getMessage(), null);

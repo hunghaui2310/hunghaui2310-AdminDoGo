@@ -1,8 +1,9 @@
-import {NativeDateAdapter} from "@angular/material/core";
+
 // @ts-ignore
 import moment from 'moment';
+import {NativeDateAdapter} from '@angular/material';
 
-export class GermanDateAdapter extends NativeDateAdapter{
+export class GermanDateAdapter extends NativeDateAdapter {
   dateFormat = 'DD/MM/YYYY';
 
   format(date: Date): string {

@@ -19,6 +19,7 @@ public class EmployeeDTO {
     private String manageName;
     private String fullName;
     private String birthday;
+    private String gender;
 
     public Long getId() {
         return id;
@@ -138,5 +139,13 @@ public class EmployeeDTO {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
