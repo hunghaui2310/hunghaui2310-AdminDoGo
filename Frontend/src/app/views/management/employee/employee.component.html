@@ -162,7 +162,7 @@
         <span *ngIf="currentP*pageSize <  listEmployee.length">{{currentP * pageSize}}</span>
         <span *ngIf="currentP*pageSize >= listEmployee.length">{{listEmployee.length}}</span>
         trên tổng số {{listEmployee.length}}
-        sản phẩm</p>
+        nhân viên</p>
       <ul style="float:right;" class="pagination">
         <pagination-controls id='productPagination' (pageChange)="pageChange($event)"
                              previousLabel="Trước"

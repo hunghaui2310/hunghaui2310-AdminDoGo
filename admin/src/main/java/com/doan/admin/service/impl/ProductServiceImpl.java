@@ -51,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
         for(Product product : list) {
             ProductDTO productDTO = new ProductDTO();
             productDTO.setId(product.getId());
+            productDTO.setCategoryId(product.getCategoryId());
             productDTO.setDescription(product.getDescription());
             productDTO.setCodeDiscount(product.getCodeDiscount());
             productDTO.setProductName(product.getProductName());
@@ -72,6 +73,7 @@ public class ProductServiceImpl implements ProductService {
         for(Object[] obj : list) {
             ProductDTO productDTO1 = new ProductDTO();
             productDTO1.setId(DataUtil.safeToLong(obj[0]));
+            productDTO1.setCategoryId(DataUtil.safeToLong(obj[1]));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = (Date) obj[2];
             productDTO1.setCreateDate(simpleDateFormat.format(date));
@@ -89,6 +91,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String deleteProduct(Long productId) throws Exception {
+        List<FileInfo> fileInfos = fileInfoRepo.findAllByProductId(productId);
+        for (FileInfo fileInfo : fileInfos) {
+            fileInfoRepo.deleteById(fileInfo.getId());
+        }
         productRepo.deleteById(productId);
         String message = Contains.SUCCESS;
         return message;
@@ -105,14 +111,14 @@ public class ProductServiceImpl implements ProductService {
             byte[] bytes = Base64.getMimeDecoder().decode(bigFile.split(",")[1]);
             ByteArrayInputStream bos = new ByteArrayInputStream(bytes);
             BufferedImage image = ImageIO.read(bos);
-            ImageIO.write(image, split[1], new File(mstrUploadPath + Contains.LARGE_SIZE + categoryId + "\\" + urlName));
+            ImageIO.write(image, split[1], new File(Contains.URL_FILE_PC + Contains.LARGE_SIZE + categoryId + "\\" + urlName));
         }
         if (!DataUtil.isNullOrEmpty(productDTO.getSmallFile())) {
             String smallFile = productDTO.getSmallFile();
             byte[] smallByte = Base64.getMimeDecoder().decode(smallFile.split(",")[1]);
             ByteArrayInputStream bis = new ByteArrayInputStream(smallByte);
             BufferedImage image = ImageIO.read(bis);
-            ImageIO.write(image, split[1], new File(mstrUploadPath + Contains.SMALL_SIZE + categoryId + "\\" + urlName));
+            ImageIO.write(image, split[1], new File(Contains.URL_FILE_PC + Contains.SMALL_SIZE + categoryId + "\\" + urlName));
         }
 
         Product product = new Product();

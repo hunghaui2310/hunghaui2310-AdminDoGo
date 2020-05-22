@@ -23,4 +23,8 @@ export class MyHeaderComponent implements OnInit {
       );
     }, 300);
   }
+
+  logout() {
+    localStorage.clear();
+  }
 }

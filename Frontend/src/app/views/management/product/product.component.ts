@@ -124,6 +124,7 @@ export class ProductComponent implements OnInit {
         } else {
           this.error('Đã xảy ra lỗi');
         }
+        this.onBack();
       }
     );
   }
@@ -136,19 +137,34 @@ export class ProductComponent implements OnInit {
     this.toastr.error(message, 'Lỗi');
   }
 
-  showModalAdd() {
+  showModal(item?: ProductModel) {
+    if (!item) {
     const dialogRef = this.dialog.open(DialogProductComponent, {
       maxWidth: '85vw',
       maxHeight: '95vh',
       width: '80vw',
       data: {
-        dataCreate: this.dataCreate
+        isCreate: true
       }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.search();
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        this.search();
+      });
+    } else {
+      console.log('da goi ham sua ', item);
+      const dialogRef = this.dialog.open(DialogProductComponent, {
+        maxWidth: '85vw',
+        maxHeight: '95vh',
+        width: '80vw',
+        data: {
+          dataEdit: item,
+          isCreate: false
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.search();
+      });
+    }
   }
 
   // getFileToBase64(event) {

@@ -27,7 +27,7 @@
       <div class="w-100 d-flex justify-content-center btn-update-config">
         <button class="btn m-2 btn-primary" (click)="search()"><i class="fa fa-search"></i>Tìm kiếm
         </button>
-        <button class="btn m-2 btn-primary" type="button" (click)="showModalAdd()"><i class="fa fa-plus"></i>
+        <button class="btn m-2 btn-primary" type="button" (click)="showModal()"><i class="fa fa-plus"></i>
           Thêm mới
         </button>
         <button class="btn m-2 btn-primary" type="button" (click)="download(listCate)"><i class="fa fa-download"></i>Tải xuống</button>
@@ -54,7 +54,7 @@
         </tr>
         </thead>
 
-        <tbody *ngIf="listProduct.length === 0">
+        <tbody *ngIf="!listProduct">
         <tr>
           <td colspan="9" align="center" style="background: white">
             Không có dữ liệu
@@ -93,12 +93,10 @@
             <div *ngIf="!eachPro.codeDiscount" style="color: darkgray">(Trống)</div>
           </td>
           <td align="center">
-            <span data-toggle="tooltip" data-toggle="tooltip" style="cursor: pointer; padding-right: 0.4rem"
-                  title="Sửa"><i
-              class="fa fa-edit "></i></span>
+            <span data-toggle="tooltip" data-toggle="tooltip" style="cursor: pointer; padding-right: 0.4rem" (click)="showModal(eachPro)"
+                  title="Sửa"><mat-icon>edit</mat-icon></span>
             <span data-toggle="tooltip" data-toggle="tooltip" style="cursor: pointer" (click)="openConfirm(deleteProduct, eachPro.id)"
-                  title="Xóa"><i
-              class="fa fa-trash-alt"></i></span>
+                  title="Xóa"><mat-icon>delete</mat-icon></span>
           </td>
         </tr>
         </tbody>

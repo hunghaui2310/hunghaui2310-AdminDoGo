@@ -50,14 +50,31 @@ export class DialogProductComponent implements OnInit {
               private toastr: ToastrService,
               private productService: ProductService,
               private cateService: CategoryService) {
-    this.formProduct();
+    if (this.data['isCreate']) {
+      this.formCreate();
+    } else {
+      this.formEdit();
+    }
     this.getAllCate();
   }
 
   ngOnInit() {
   }
 
-  formProduct() {
+  formEdit() {
+    this.productForm = this.fb.group({
+      productName: [this.data['dataEdit']['productName'], {validators: [Validators.required]}],
+      category: [this.data['dataEdit']['categoryId'], {validators: [Validators.required]}],
+      price: [this.data['dataEdit']['price'], {validators: [Validators.required]}],
+      codeDiscount: [this.data['dataEdit']['codeDiscount']],
+      discount: [this.data['dataEdit']['discount']],
+      description: [this.data['dataEdit']['description'], {validators: [Validators.required]}],
+      bigFile: [this.data['dataEdit']['urlImage'], {validators: [Validators.required]}],
+      smallFile: [this.data['dataEdit']['smallFile'], {validators: [Validators.required]}]
+    });
+  }
+
+  formCreate() {
     this.productForm = this.fb.group({
       productName: ['', {validators: [Validators.required]}],
       category: [null, {validators: [Validators.required]}],
@@ -148,7 +165,7 @@ export class DialogProductComponent implements OnInit {
         } else {
           this.notiError('Đã xảy ra lỗi');
         }
-        this.modalRef.hide();
+        this.close();
         this.getAllCate();
       }
     );

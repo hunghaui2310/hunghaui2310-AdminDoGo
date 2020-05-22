@@ -5,6 +5,8 @@ import {ToastrService} from 'ngx-toastr';
 import {first} from 'rxjs/operators';
 import {OauthService} from '../../../services/oauth.service';
 import {ApiService} from '../../../services/api.service';
+import {HttpClient} from '@angular/common/http';
+import {appConfig} from '../../../config/app.config';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,8 @@ export class LoginComponent implements OnInit {
               private fb: FormBuilder,
               private zone: NgZone,
               private apiService: ApiService,
-              private toast: ToastrService) { }
+              private toast: ToastrService,
+              private http: HttpClient) { }
 
   ngOnInit() {
     this.createForm();
@@ -90,7 +93,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginFacebook() {
-    this.apiService.loginFacebookAPI().subscribe(
+    this.http.get(appConfig.facebook_login_api).subscribe(
       data => {
         this.urlFacebook = data['data'];
         console.log('url Facebook', this.urlFacebook);

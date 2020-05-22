@@ -11,6 +11,8 @@ import {BlogComponent} from './views/management/blog/blog.component';
 import {EmployeeComponent} from './views/management/employee/employee.component';
 import {CategoryComponent} from './views/management/category/category.component';
 import {ChartComponent} from './views/charts/chart/chart.component';
+import {NotificationComponent} from './views/notification/notification.component';
+import {AuthGuard} from './interceptor/auth.guard';
 
 const routes: Routes = [
   {
@@ -44,22 +46,30 @@ const routes: Routes = [
       {
         path: 'product',
         component: ProductComponent,
+        canActivate: [AuthGuard],
         data: { title: 'Quản lý sản phẩm'}
       },
       {
         path: 'category',
         component: CategoryComponent,
+        canActivate: [AuthGuard],
         data: { title: 'Quản lý thể loại'}
       },
       {
         path: 'blog',
         component: BlogComponent,
+        canActivate: [AuthGuard],
         data: { title: 'Quản lý bài viết'}
       },
       {
         path: 'employee',
         component: EmployeeComponent,
+        canActivate: [AuthGuard],
         data: { title: 'Quản lý nhân viên'}
+      },
+      {
+        path: 'notification',
+        component: NotificationComponent
       }
     ]
   }

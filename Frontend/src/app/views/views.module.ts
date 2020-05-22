@@ -37,6 +37,7 @@ import { ChartComponent } from './charts/chart/chart.component';
 import { DountChartComponent } from './charts/dount-chart/dount-chart.component';
 import {ChartsModule} from 'ng2-charts';
 import { DialogEmployeeComponent } from './management/employee/dialog-employee/dialog-employee.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { DialogEmployeeComponent } from './management/employee/dialog-employee/d
     DatePickerComponent,
     ChartComponent,
     DountChartComponent,
-    DialogEmployeeComponent
+    DialogEmployeeComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule,
